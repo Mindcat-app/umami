@@ -33,6 +33,29 @@ html[style*="padding-right"] {
   padding-right: 0 !important;
 }
 
+::placeholder {
+  color: var(--zen-fg-muted);
+  opacity: 1;
+}
+
+/* Respect the OS "reduce motion" setting (WCAG 2.2 SC 2.3.3). !important is needed because the side
+   nav sets an inline transition. Spinners keep moving: they are feedback, not decoration. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+
+  *:not([data-slot="spinner"], [data-slot="spinner"] *, [data-slot="loading"] *),
+  *::before,
+  *::after {
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
 /* Fix autofill background color to match theme */
 input:is(:-webkit-autofill, :autofill),
 input:is(:-webkit-autofill, :autofill):hover,
