@@ -2,13 +2,24 @@
   --zen-font-family: var(--font-inter), sans-serif;
 }
 
-/* Preserve the brand accent when Zen applies its light or dark theme tokens. */
-:root,
-[data-theme="light"],
+/* Preserve the brand accent when Zen applies its light or dark theme tokens.
+   Light: blue-600 with white text is 5.26:1 (blue-500 was 3.60:1, under WCAG AA 4.5:1).
+   Dark: blue-400 with near-black text is 7.51:1, and the same blue as text on the dark card is 6.79:1. */
+/* `:root` alone would also match <html data-theme="dark">, so the light values are scoped. */
+:root:not([data-theme="dark"]):not(.dark),
+[data-theme="light"] {
+  --zen-primary: oklch(54.6% 0.245 262.881);
+  --zen-primary-fg: oklch(98.5% 0 0);
+  /* Muted text and placeholders: 5.28:1 on the #fafafa page (palette-500 is 4.53:1). */
+  --zen-fg-muted: oklch(0.52 0 0);
+  /* Danger buttons: red-600, white text 4.76:1 (red-500 is 3.82:1). */
+  --zen-status-error: oklch(0.577 0.245 27.325);
+}
+
 [data-theme="dark"],
 .dark {
-  --zen-primary: oklch(62.3% 0.214 259.815);
-  --zen-primary-fg: oklch(98.5% 0 0);
+  --zen-primary: oklch(70.7% 0.165 254.624);
+  --zen-primary-fg: oklch(0.145 0 0);
 }
 
 /* Zen's rem-based typography and spacing assume the browser's default root size. */
