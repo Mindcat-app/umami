@@ -36,8 +36,7 @@ export function ChangeLabel({
   const neutral = value === 0 || Number.isNaN(value);
   const good = reverseColors ? negative : positive;
 
-  const style =
-    STYLES[good && 'positive'] || STYLES[!good && 'negative'] || STYLES[neutral && 'neutral'];
+  const style = neutral ? STYLES.neutral : good ? STYLES.positive : STYLES.negative;
 
   return (
     <Row
